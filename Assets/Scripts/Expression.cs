@@ -68,7 +68,16 @@ public class Expression
     
     //TODO + isValidEquation() : boolean
     
-    //TODO + isValidEquation() : boolean
-    
     //TODO + toString() : string
+    public override string ToString()
+    {
+        return _type switch
+        {
+            ExprNodeType.NUMBER => _value.ToString(),
+            ExprNodeType.PLUS => $"({_left} + {_right})",
+            ExprNodeType.MINUS => $"({_left} - {_right})",
+            ExprNodeType.EQUAL => $"({_left} == {_right})",
+            _ => "Неизвестный оператор"
+        };
+    }
 }
