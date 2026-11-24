@@ -67,8 +67,43 @@ public class Expression
     }
     
     //TODO + isValidEquation() : boolean
+    public boolean isValidEquation()
+    {
+        // Найти оператор равенства
+        Expression equation = searchOperation(ExprNodeType.EQUAL);
+        if (equation == null) return false;
+        
+        // Пересобрать выражение, сделав его корневым
+
+        // Выброситьб искл, если в правой или левой части есть оператор равенства
+        // Сравнить обе части через calculate 
+    }
     
-    //TODO + toString() : string
+    private Expression searchOperation(ExprNodeType targetType)
+    {
+        // Если текущий узел — это искомый оператор, возвращаем его
+        if (_type == targetType)
+        {
+            return new Expression(_left, _right, _type, _value);
+        }
+        // Иначе ищем в левой и праовй части
+        else 
+        {
+            Expression foundLeft = _left?.searchOperation(targetType);
+            Expression foundRight = _right?.searchOperation(targetType);
+            if (foundLeft != null)
+            {
+                return foundLeft;
+            }
+            else if (foundRight != null)
+            {
+                return foundRight;
+            }
+
+            return null;
+        }
+    }
+    
     public override string ToString()
     {
         return _type switch
