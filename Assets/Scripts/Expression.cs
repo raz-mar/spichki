@@ -54,11 +54,17 @@ public class Expression
         );
     }
     
-    //TODO + calculate() : int
-    //int calculate() 
-    //{
-        
-    //}
+    int calculate()
+    {
+        return _type switch
+        {
+            ExprNodeType.NUMBER => _value,
+            ExprNodeType.PLUS => _left.calculate() + _right.calculate(),
+            ExprNodeType.MINUS => _left.calculate() - _right.calculate(),
+            ExprNodeType.EQUAL => throw new InvalidOperationException("Уравнение проверяется через isValidEquation(), а не вычисляется"),
+            _ => throw new InvalidOperationException($"Невозможно вычислить выражение типа {_type}")
+        };
+    }
     
     //TODO + isValidEquation() : boolean
     
